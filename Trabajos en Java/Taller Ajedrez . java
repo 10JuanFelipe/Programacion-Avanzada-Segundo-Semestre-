@@ -1,0 +1,78 @@
+import java.util.ArrayList;
+import java.util.Collections;
+
+class Jugador implements Comparable<Jugador> {
+    private String nombre;
+    private int elo;
+    private int edad;
+    private int valorPremio;
+
+    public Jugador(String nombre, int elo, int edad, int valorPremio) {
+        this.nombre = nombre;
+        this.elo = elo;
+        this.edad = edad;
+        this.valorPremio = valorPremio;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public int getElo() {
+        return elo;
+    }
+
+    public int getEdad() {
+        return edad;
+    }
+
+    public int getValorPremio() {
+        return valorPremio;
+    }
+
+    @Override
+    public String toString() {
+        return "Nombre: " + nombre + ", ELO: " + elo + ", Edad: " + edad + ", Valor del premio: " + valorPremio;
+    }
+
+    @Override
+    public int compareTo(Jugador jugador) {
+        // Ordenar por ELO
+        if (this.elo != jugador.elo) {
+            return this.elo - jugador.elo;
+        }
+        // Si los ELO son iguales, ordenar por Edad
+        else if (this.edad != jugador.edad) {
+            return this.edad - jugador.edad;
+        }
+        // Si los ELO y Edades son iguales, ordenar por Valor del premio
+        else {
+            return this.valorPremio - jugador.valorPremio;
+        }
+    }
+}
+
+public class JugadorAjedrez {
+    public static void main(String[] args) {
+        ArrayList<Jugador> jugadores = new ArrayList<>();
+
+        jugadores.add(new Jugador("Jugador1", 2000, 25, 1000));
+        jugadores.add(new Jugador("Jugador2", 1900, 32, 1500));
+        jugadores.add(new Jugador("Jugador3", 2100, 28, 2000));
+        jugadores.add(new Jugador("Jugador4", 1800, 22, 1200));
+        jugadores.add(new Jugador("Jugador5", 2200, 30, 2500));
+        jugadores.add(new Jugador("Jugador6", 1700, 27, 900));
+        jugadores.add(new Jugador("Jugador7", 2400, 35, 3000));
+
+        System.out.println("Lista de jugadores (desordenada):");
+        for (Jugador jugador : jugadores) {
+            System.out.println(jugador);
+        }
+
+        System.out.println("\nOrdenando jugadores por ELO, Edad y Valor del premio:");
+        Collections.sort(jugadores);
+        for (Jugador jugador : jugadores) {
+            System.out.println(jugador);
+        }
+    }
+}
